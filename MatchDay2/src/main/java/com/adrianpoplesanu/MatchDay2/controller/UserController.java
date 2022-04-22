@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
-@RequestMapping("/")
-public class StatusController {
-    @GetMapping("/status")
+@RequestMapping(value = "/user")
+public class UserController {
+    @GetMapping(value = "/info")
     @ResponseBody
-    String status() {
-        return "buna dimineata";
+    String userInfo(Principal principal) {
+        return principal.toString();
     }
 }
