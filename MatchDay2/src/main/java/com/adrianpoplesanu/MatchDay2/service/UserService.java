@@ -10,10 +10,22 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void processOauth2PostLogin(String email) {
+    public void processOauth2PostLogin(String sub, String name, String firstName,
+                                       String lastName, String picture, String email,
+                                       String emailVerified, String locale) {
         User user = userRepository.getUserByEmail(email);
         if (user == null) {
-            System.out.println(email + " needs to be added as user");
+            user = new User();
+            user.setName(name);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setSub(sub);
+            user.setProfileImageUrl(picture);
+            user.setEmailVerified(emailVerified);
+            user.setLocale(locale);
+            user.setActivated("PENDING");
+            userRepository.save(user);
         }
     }
 
@@ -24,7 +36,7 @@ public class UserService {
             user.setName(name);
             user.setEmail(email);
             user.setFirstName(firstName);
-            user.setLastNamel(lastName);
+            user.setLastName(lastName);
             userRepository.save(user);
             return user;
         } else {

@@ -17,7 +17,7 @@ public class User {
     private String firstName;
 
     @Column(name = "last_name")
-    private String lastNamel;
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -30,6 +30,15 @@ public class User {
 
     @Column(name = "profile_image_url")
     private String profileImageUrl;
+
+    @Column(name = "sub")
+    private String sub;
+
+    @Column(name = "email_verified")
+    private String emailVerified;
+
+    @Column(name = "locale")
+    private String locale;
 
     public long getId() {
         return id;
@@ -55,12 +64,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastNamel() {
-        return lastNamel;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastNamel(String lastNamel) {
-        this.lastNamel = lastNamel;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -93,5 +102,29 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
+    }
+
+    public String getEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(String email_verified) {
+        this.emailVerified = email_verified;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 }
