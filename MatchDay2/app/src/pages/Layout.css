@@ -1,16 +1,4 @@
-.btn:hover {
-
-}
-
-.name {
-    margin-right: 10px;
-    margin-left: -40px;
-}
-
 .poza {
+    display: none;
     width: 60%;
-    padding-left: 60px;
-}
-
-.right-panel {
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import './Layout.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Activation from './Activation';
 
 class Layout extends Component {
 
@@ -30,6 +31,12 @@ class Layout extends Component {
         }
 
         console.log(message);
+        if (message.isActivated === 'false') {
+            //return <p>Need to activate account...</p>
+            return (
+                <Activation />
+            )
+        }
 
         return (
             <>
@@ -57,11 +64,12 @@ class Layout extends Component {
                             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                                 <img class="poza"
                                 src="https://lh3.googleusercontent.com/a/AATXAJwuVkP5WxwquKLL9FSJ59AhMpG9QwYNGZx2Ob-J=s96-c"
+                                alt=""
                                 />
                             </a>
 
-                            <div class="text-end">
-                                <span class="name">{message.name}</span>
+                            <div class="text-end ml-5">
+                                <span class="name mr-4">{message.name}</span>
                                 <button type="button" onClick={this.handleLogout} class="btn btn-warning">Logout</button>
                             </div>
 
