@@ -1,15 +1,18 @@
 package com.adrianpoplesanu.MatchDay2.controller;
 
 import com.adrianpoplesanu.MatchDay2.service.UserService;
+import com.adrianpoplesanu.MatchDay2.utils.ActivationManager;
+import com.adrianpoplesanu.MatchDay2.utils.ActivationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Principal;
 
 @RestController
@@ -19,9 +22,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ActivationManager activationManager;
+
     @GetMapping(value = "/info", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String userInfo(Authentication authentication) {
+    public String userInfo(Authentication authentication) {
         DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
 
         String googleId = oAuth2User.getAttribute("sub").toString();
@@ -33,6 +39,8 @@ public class UserController {
         String email_verified = oAuth2User.getAttribute("email_verified").toString();
         String locale = oAuth2User.getAttribute("locale").toString();
 
+        //User user = userService.getUserByEmail(email);
+
         return "{\"googleId\": \"" + googleId + "\", " +
                 "\"name\": \"" + name + "\", " +
                 "\"firstName\": \"" + firstName + "\", " +
@@ -41,6 +49,29 @@ public class UserController {
                 "\"email\": \"" + email + "\", " +
                 "\"email_verified\": \"" + email_verified + "\", " +
                 "\"locale\": \"" + locale + "\", " +
+                "\"isActivated\": \"" + userService.isUserActivated(email) + "\", " +
                 "\"raw\": \"" + authentication.getPrincipal().toString() +"\"}";
+    }
+
+    @PostMapping(value = "/activate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String activateUser(@RequestBody ActivationRequest activationRequest) {
+        if (activationManager.checkCode(activationRequest.getActivationCode())) {
+            return "{\"mesaj\": \"ar trebui activat\"}";
+        } else {
+            return "{\"mesaj\": \"NU e bun codul!!!}\"";
+        }
+    }
+
+    @GetMapping(value = "/test-cron")
+    @ResponseBody
+    public String testCron() throws IOException {
+        System.out.println("buna dimineata !!!");
+        String fileName = "/Users/adrianpoplesanu/Documents/test.txt";
+        String str = String.valueOf(java.time.LocalDate.now());
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(str);
+        writer.close();
+        return "ala bala portocala";
     }
 }

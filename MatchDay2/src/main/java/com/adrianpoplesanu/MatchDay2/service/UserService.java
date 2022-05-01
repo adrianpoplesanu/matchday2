@@ -48,4 +48,15 @@ public class UserService {
         User user = userRepository.getUserByEmail(email);
         return "ACTIVATED".equals(user.getActivated());
     }
+
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
+    public User activateUser(String email) {
+        User user = userRepository.getUserByEmail(email);
+        user.setActivated("ACTIVATED");
+        userRepository.save(user);
+        return user;
+    }
 }

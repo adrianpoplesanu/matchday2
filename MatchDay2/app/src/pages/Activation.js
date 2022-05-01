@@ -3,8 +3,27 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Activation extends Component {
+    state = {
+        isLoading: false,
+        activationCode: null
+    }
+
+    getInputValue(event) {
+        // show the user input value to console
+        const userValue = event.target.value;
+
+        console.log(userValue);
+    };
+
     handleActivationCode() {
-        //...
+        const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ activationCode: 'aici pune codul de activare' })
+            };
+            fetch('/user/activate', requestOptions)
+                .then(response => response.json())
+                .then(data => this.setState({ postId: data.id }));
     }
 
     render() {
@@ -17,7 +36,7 @@ class Activation extends Component {
                     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="text" class="form-control form-control-dark" placeholder="activation code..." aria-label="Activation code"></input>
+                            <input type="password" class="form-control form-control-dark" placeholder="activation code..." aria-label="Activation code" onChange={this.getInputValue} />
                         </form>
 
                         <div class="text-end ml-5">
