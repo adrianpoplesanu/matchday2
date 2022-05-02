@@ -40,6 +40,9 @@ public class User {
     @Column(name = "locale")
     private String locale;
 
+    @Column(name = "role")
+    private String role;
+
     public long getId() {
         return id;
     }
@@ -126,5 +129,13 @@ public class User {
 
     public void setLocale(String locale) {
         this.locale = locale;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

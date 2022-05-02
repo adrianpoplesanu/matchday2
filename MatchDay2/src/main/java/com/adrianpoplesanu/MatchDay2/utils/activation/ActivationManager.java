@@ -1,4 +1,4 @@
-package com.adrianpoplesanu.MatchDay2.utils;
+package com.adrianpoplesanu.MatchDay2.utils.activation;
 
 import org.springframework.stereotype.Component;
 

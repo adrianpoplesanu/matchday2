@@ -1,10 +1,9 @@
 package com.adrianpoplesanu.MatchDay2.controller;
 
 import com.adrianpoplesanu.MatchDay2.service.UserService;
-import com.adrianpoplesanu.MatchDay2.utils.ActivationManager;
-import com.adrianpoplesanu.MatchDay2.utils.ActivationRequest;
+import com.adrianpoplesanu.MatchDay2.utils.activation.ActivationManager;
+import com.adrianpoplesanu.MatchDay2.utils.activation.ActivationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -57,9 +55,9 @@ public class UserController {
     @ResponseBody
     public String activateUser(@RequestBody ActivationRequest activationRequest) {
         if (activationManager.checkCode(activationRequest.getActivationCode())) {
-            return "{\"mesaj\": \"ar trebui activat\"}";
+            return "{\"message\": \"activated\"}";
         } else {
-            return "{\"mesaj\": \"NU e bun codul!!!}\"";
+            return "{\"message\": \"failed\"}";
         }
     }
 
