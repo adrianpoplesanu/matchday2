@@ -21,6 +21,7 @@ public class CronjobManager {
     public void downloadCompetitions() throws IOException {
         if (downloadFlag) {
             String timestamp = java.time.LocalDate.now() + " " + java.time.LocalTime.now();
+            competitionsDownloaderClient.downloadPLCompetitionMatches();
             System.out.println("[Download Competition Cron] run: " + timestamp);
         }
     }
