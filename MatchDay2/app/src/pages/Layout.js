@@ -16,6 +16,12 @@ class Layout extends Component {
         window.location.href = '/logout';
     }
 
+    renderAdmin() {
+        if(this.state.isAdmin === 'true')
+              return <li><Link class="nav-link px-2 text-secondary" to="/admin">Admin</Link></li>;
+        return null;
+    }
+
     async componentDidMount() {
         const response = await fetch('/user/info');
         const body = await response.json();
@@ -55,6 +61,7 @@ class Layout extends Component {
                             <li>
                                 <Link class="nav-link px-2 text-secondary" to="/profile">Profile</Link>
                             </li>
+                            { this.renderAdmin() }
                             </ul>
 
                             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

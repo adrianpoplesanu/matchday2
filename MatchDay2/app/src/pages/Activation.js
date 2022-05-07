@@ -3,27 +3,50 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Activation extends Component {
-    state = {
-        isLoading: false,
-        activationCode: null
+    constructor() {
+        super();
+        this.state = {
+            isLoading: false,
+            activationCode: null,
+            message: null
+        }
+        this.getInputValue = this.getInputValue.bind(this);
+        this.handleActivationCode = this.handleActivationCode.bind(this);
     }
 
     getInputValue(event) {
         // show the user input value to console
         const userValue = event.target.value;
-
         console.log(userValue);
+        this.setState({activationCode: userValue});
     };
 
     handleActivationCode() {
         const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ activationCode: 'aici pune codul de activare' })
+                body: JSON.stringify({ activationCode: this.state.activationCode })
             };
             fetch('/user/activate', requestOptions)
                 .then(response => response.json())
-                .then(data => this.setState({ postId: data.id }));
+                .then(data => {
+                    console.log(data);
+                    this.setState({ message: data.message })
+                    if (data.message === 'failed') {
+                        console.log("no bueno");
+                    }
+                    if (data.message === 'activated') {
+                        this.handleSuccess();
+                    }
+                });
+    }
+
+    handleSuccess() {
+        window.location.href = '/';
+    }
+
+    handleLogout() {
+        window.location.href = '/logout';
     }
 
     render() {
@@ -40,7 +63,8 @@ class Activation extends Component {
                         </form>
 
                         <div class="text-end ml-5">
-                            <button type="button" onClick={this.handleActivationCode} class="btn btn-warning">Activate account</button>
+                            <button type="button" onClick={this.handleActivationCode} class="btn btn-warning mr-1">Activate account</button>
+                            <button type="button" onClick={this.handleLogout} class="btn btn-outline-light">Logout</button>
                         </div>
 
                     </div>
