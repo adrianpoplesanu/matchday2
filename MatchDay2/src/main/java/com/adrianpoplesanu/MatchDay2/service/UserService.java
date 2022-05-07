@@ -49,6 +49,16 @@ public class UserService {
         return "ACTIVATED".equals(user.getActivated());
     }
 
+    public boolean isAdmin(String email) {
+        User user = userRepository.getUserByEmail(email);
+        return "ADMIN".equals(user.getRole());
+    }
+
+    public boolean isActive(String email) {
+        User user = userRepository.getUserByEmail(email);
+        return "ACTIVE".equals(user.getStatus());
+    }
+
     public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }

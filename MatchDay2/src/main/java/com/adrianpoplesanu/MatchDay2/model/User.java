@@ -43,6 +43,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "status")
+    private String status;
+
     public long getId() {
         return id;
     }
@@ -137,5 +140,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

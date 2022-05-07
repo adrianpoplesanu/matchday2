@@ -48,6 +48,8 @@ public class UserController {
                 "\"email_verified\": \"" + email_verified + "\", " +
                 "\"locale\": \"" + locale + "\", " +
                 "\"isActivated\": \"" + userService.isUserActivated(email) + "\", " +
+                "\"isAdmin\": \"" + userService.isAdmin(email) + "\", " +
+                "\"isActive\": \"" + userService.isActive(email) + "\", " +
                 "\"raw\": \"" + authentication.getPrincipal().toString() +"\"}";
     }
 
