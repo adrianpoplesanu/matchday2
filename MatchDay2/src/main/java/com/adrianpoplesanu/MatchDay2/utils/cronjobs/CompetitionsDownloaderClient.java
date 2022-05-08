@@ -16,11 +16,13 @@ public class CompetitionsDownloaderClient {
     private CompetitionService competitionService;
 
     public void downloadPLCompetitionMatches() {
-        competitionService.getAllCompetitions().stream().filter(competition -> {
-            return "ACTIVE".equals(competition.getActive());
-        }).forEach(competition -> {
-            System.out.println(competition.getName());
-        });
+        competitionService.getAllCompetitions()
+                .stream()
+                .filter(competition -> {
+                    return "ACTIVE".equals(competition.getActive());
+                }).forEach(competition -> {
+                    System.out.println("Downloading competition: " + competition.getName());
+                });
         Match[] matches = footballDataApiClient.getMatchesForCompetition("PL");
         System.out.println(matches);
     }
