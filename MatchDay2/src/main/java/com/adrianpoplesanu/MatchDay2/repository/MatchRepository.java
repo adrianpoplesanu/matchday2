@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
-    List<Match> findByCompetitionCodeAndHomeTeamAndAwayTeam(String competitionCode, String homeTeam, String awayTeam);
+    Match findByCompetitionCodeAndHomeTeamAndAwayTeam(String competitionCode, String homeTeam, String awayTeam);
     List<Match> findByCompetitionCode(String competitionCode);
 }

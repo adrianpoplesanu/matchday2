@@ -16,7 +16,7 @@ public class MatchService {
     private MatchRepository matchRepository;
 
     public Match getMatchByCompetitionAndTeams(String competitionId, String homeTeam, String awayTeam) {
-        return matchRepository.findByCompetitionCodeAndHomeTeamAndAwayTeam(competitionId, homeTeam, awayTeam).get(0);
+        return matchRepository.findByCompetitionCodeAndHomeTeamAndAwayTeam(competitionId, homeTeam, awayTeam);
     }
 
     public List<Match> getMatchesByCompetition(String competitionId) {
