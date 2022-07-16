@@ -17,6 +17,9 @@ class Layout extends Component {
     }
 
     renderAdmin() {
+        console.log("in renderAdmin()");
+        console.log(this.state.isAdmin);
+        console.log(this.state);
         if(this.state.isAdmin === 'true')
               return <li><Link class="nav-link px-2 text-secondary" to="/admin">Admin</Link></li>;
         return null;
@@ -26,7 +29,7 @@ class Layout extends Component {
         const response = await fetch('/user/info');
         const body = await response.json();
 
-        this.setState({ message: body, isLoading: false });
+        this.setState({ message: body, isLoading: false, isAdmin: body.isAdmin });
     }
 
     render() {

@@ -8,6 +8,7 @@ import Home from './pages/Home';
 // import Activation from './pages/Activation';
 import Predictions from './pages/Predictions';
 import Profile from './pages/Profile';
+import Admin from './pages/Admin';
 import Logout from './pages/Logout';
 import NoPage from './pages/NoPage';
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="predictions" element={<Predictions />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="logout" element={<Logout />} />
           <Route path="*" element={<NoPage />} />
         </Route>

@@ -8,6 +8,8 @@ cd app
 yarn add bootstrap@4.1.3 react-cookie@3.0.4 react-router-dom@4.3.1 reactstrap@6.5.0
 npm i -D react-router-dom@latest
 yarn start
+
+npm install jquery --save
 ```
 
 #### docker - mysql container

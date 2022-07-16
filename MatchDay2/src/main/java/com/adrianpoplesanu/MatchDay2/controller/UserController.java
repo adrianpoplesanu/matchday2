@@ -55,8 +55,12 @@ public class UserController {
 
     @PostMapping(value = "/activate", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String activateUser(@RequestBody ActivationRequest activationRequest) {
+    public String activateUser(@RequestBody ActivationRequest activationRequest, Authentication authentication) {
+        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
+        String email = oAuth2User.getAttribute("email").toString();
+
         if (activationManager.checkCode(activationRequest.getActivationCode())) {
+            userService.activateUser(email);
             return "{\"message\": \"activated\"}";
         } else {
             return "{\"message\": \"failed\"}";

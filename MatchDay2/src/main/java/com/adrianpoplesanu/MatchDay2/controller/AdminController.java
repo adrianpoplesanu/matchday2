@@ -1,16 +1,32 @@
 package com.adrianpoplesanu.MatchDay2.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.adrianpoplesanu.MatchDay2.model.Competition;
+import com.adrianpoplesanu.MatchDay2.model.User;
+import com.adrianpoplesanu.MatchDay2.service.CompetitionService;
+import com.adrianpoplesanu.MatchDay2.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
-    @PutMapping("/add-comptition")
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    CompetitionService competitionService;
+
+    @GetMapping("/competitions")
+    public List<Competition> getAllCompetitions() {
+        return competitionService.getAllCompetitions();
+    }
+
+    @PutMapping("/competition")
     public String addCompetition() {
-        return null;
+        return "bebe dec e latrutz";
     }
 
     @PostMapping("/activate-competition")
@@ -25,6 +41,17 @@ public class AdminController {
 
     @PostMapping("/change-user-status")
     public String changeUserStatus() {
+        return null;
+    }
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return users;
+    }
+
+    @PutMapping("/user")
+    public User updateUser() {
         return null;
     }
 }
